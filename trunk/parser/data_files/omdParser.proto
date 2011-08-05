@@ -1,0 +1,331 @@
+// vim: set et ts=4 shiftwidth=4 :
+
+package omdParser;
+
+// Deprecated..  Do not use..
+enum CollectionType
+{
+    UnknownEnum             = -1;
+    RootEnum                =  0;
+    ObjectModelEnum         =  1;
+    ClassEnum               =  2;
+    AttributeEnum           =  3;
+    InteractionEnum         =  4;
+    ParameterEnum           =  5;
+    CDTEnum                 =  6;
+    ComplexComponentEnum    =  7;
+    EDTEnum                 =  8;
+    EnumerationEnum         =  9;
+    RoutingSpaceEnum        = 10;
+    DimensionEnum           = 11;
+    NoteEnum                = 12;
+}
+
+// Deprecated.  do not use...
+message ElementNode
+{
+    required string key     = 1;
+    required string value   = 2;
+    repeated uint32 note    = 3;
+}
+
+// Deprecated..  do not use
+message CollectionNode
+{
+    required CollectionType type       = 1;
+    repeated ElementNode    element    = 2; 
+    repeated CollectionNode collection = 3;
+
+}
+
+message boolValue
+{
+    required bool   value = 1;
+    repeated int32  notes = 2;
+}
+
+message int32Value
+{
+    required int32  value = 1;
+    repeated int32  notes = 2;
+}
+
+message uint32Value
+{
+    required uint32 value = 1;
+    repeated int32  notes = 2;
+}
+
+message stringValue
+{
+    required string value = 1;
+    repeated int32  notes = 2;
+}
+
+// Represents an enumerated data type
+message EnumeratedDataType
+{
+	// Represents an enumeration
+    message Enumeration
+    {
+        required stringValue enumerator     = 1;
+        required int32Value representation  = 2;
+    }
+
+    required stringValue name            = 1;
+    optional boolValue   mom_data_type   = 2;
+    optional int32Value  representation  = 3;
+    optional stringValue description     = 4;
+    optional int32Value  start_value     = 5;
+    optional boolValue   auto_sequence   = 6;
+    repeated Enumeration enumerations    = 7;
+}
+
+
+
+
+// Represents a complex data type
+message ComplexDataType
+{
+    message ComplexComponent
+    {
+        required stringValue  field_name              = 1;
+        optional stringValue  data_type               = 2;
+        optional stringValue  accuracy                = 3;
+        optional stringValue  accuracy_condition      = 4;
+        optional stringValue  units                   = 5;
+        optional stringValue  resolution              = 6;
+        optional stringValue  cardinality             = 7;
+        optional stringValue  description             = 8;
+    }
+
+    required stringValue      name                    = 1;
+    optional stringValue      description             = 2;
+    optional boolValue        mom_data_type           = 3;
+
+    repeated ComplexComponent complex_component       = 4;
+}
+
+
+// Represents an OMD class
+message Class
+{
+    message Attribute
+    {
+        enum UpdateType
+        {
+            Static      = 0;
+            Periodic    = 1;
+            Conditional = 2;
+        }
+
+        message UpdateTypeValue
+        {
+            required UpdateType value = 1;
+            repeated int32      notes = 2;
+        }
+        
+        enum TransferAccept
+        {
+            TA  = 0;
+            T   = 1;
+            A   = 2;
+            N   = 3;
+        }
+
+        message TransferAcceptValue
+        {
+            required TransferAccept value = 1;
+            repeated int32          notes = 2;
+        }
+        
+
+
+        enum UpdateReflect
+        {
+            UR  = 0;
+            U   = 1;
+            R   = 2;
+        }
+
+        message UpdateReflectValue
+        {
+            required UpdateReflect value = 1;
+            repeated int32         notes = 2;
+        }
+    
+        required stringValue         name                   =  1;
+        optional stringValue         cardinality            =  2;
+        optional stringValue         data_type              =  3;
+        optional stringValue         description            =  4;
+        optional stringValue         units                  =  5;
+        optional stringValue         resolution             =  6;
+        optional stringValue         accuracy               =  7;
+        optional stringValue         accuracy_condition     =  8;
+        optional stringValue         delivery_category      =  9;
+        optional stringValue         message_ordering       = 10;
+        optional stringValue         routing_space          = 11;
+        optional UpdateTypeValue     update_type            = 12;
+        optional stringValue         update_condition       = 13;
+        optional TransferAcceptValue transfer_accept        = 14;
+        optional UpdateReflectValue  update_reflect         = 15;
+
+    }
+
+    enum PSCapabilities
+    {
+        PS  = 0;
+        N   = 1;
+        S   = 2;
+        P   = 3;
+    }
+
+    message PSCapabilitiesValue
+    {
+        required PSCapabilities value = 1;
+        repeated int32          notes = 2;
+    }
+
+    required int32Value          id                      = 1;
+    required stringValue         name                    = 2;
+    optional PSCapabilitiesValue ps_capabilities         = 3;
+    optional stringValue         description             = 4;
+    optional boolValue           mom_class               = 5;
+    optional int32Value          superclass              = 6;
+    repeated Attribute           attributes              = 7;
+}
+
+
+// Represents an omd Interaction
+message Interaction
+{
+    enum ISR_Type
+    {
+        IS  = 1;
+        IR  = 2;
+        I   = 3;
+        S   = 4;
+        R   = 5;
+        N   = 6;
+    }
+
+    message ISR_TypeValue
+    {
+        required ISR_Type value = 1;
+        repeated int32    notes = 2;
+    }
+
+    message Parameter
+    {
+        required stringValue     name                        = 1;
+        required stringValue     data_type                   = 2;
+        required stringValue     cardinality                 = 3;
+        optional stringValue     description                 = 4;
+        optional stringValue     units                       = 5;
+        optional stringValue     resolution                  = 6;
+        optional stringValue     accuracy                    = 7;
+        optional stringValue     accuracy_condition          = 8;
+    };
+
+    required int32Value     id                      =  1;
+    required stringValue    name                    =  2;
+    optional stringValue    description             =  3;
+    optional stringValue    delivery_category       =  4;
+    optional stringValue    message_ordering        =  5;
+    optional ISR_TypeValue  isr_type                =  6;
+    optional boolValue      mom_interaction         =  7;
+    optional stringValue    routing_space           =  8;
+    optional int32Value     super_interaction       =  9;
+    repeated Parameter      parameters              = 10;
+}
+
+message Note
+{
+    required int32Value  note_number = 1;
+    required stringValue note_text   = 2;
+}
+
+message RoutingSpace
+{
+    message Dimension
+    {
+        enum IntervalType
+        {
+            Open    = 1;
+            Closed  = 2;
+        };
+        
+        message IntervalTypeValue
+        {
+            required IntervalType   value = 1;
+            repeated int32          notes = 2;
+        };
+
+        required stringValue        name                    =  1;
+        optional stringValue        dimension_type          =  2;
+        optional stringValue        dimension_minimum       =  3;
+        optional stringValue        dimension_maximum       =  4;
+     
+        optional IntervalTypeValue  interval_type           =  5;
+        optional stringValue        range_set_units         =  6;
+        optional stringValue        normalization_function  =  7;
+    }
+    
+    required stringValue        name                    =  1;
+    optional stringValue        description             =  2;
+    repeated Dimension          dimensions              =  3;
+}
+
+
+
+message OmdComponent
+{
+    enum ComponentType
+    {
+        class_type          = 1;
+        interaction_type    = 2;
+        edt_type            = 3; 
+        cdt_type            = 4;
+        note_type           = 5;
+        route_space_type    = 6;
+    }
+
+    required ComponentType      type                        = 1;
+    
+    optional Class              class                       = 2;
+    optional Interaction        interaction                 = 3;
+    optional EnumeratedDataType enumerated_data_type        = 4;
+    optional ComplexDataType    complex_data_type           = 5;
+    optional Note               note                        = 6;
+    optional RoutingSpace       routing_space               = 7;
+
+	repeated OmdComponent		children					= 8;
+}
+
+message ObjectModel
+{
+    required stringValue        name                        =  1;
+    optional stringValue        version_number              =  2;
+    optional stringValue        type                        =  3;
+    optional stringValue        purpose                     =  4;
+    optional stringValue        application_domain          =  5;
+    optional stringValue        sponsor_org_name            =  6;
+    optional stringValue        poc_honorific_name          =  7;
+    optional stringValue        poc_first_name              =  8;
+    optional stringValue        poc_last_name               =  9;
+    optional stringValue        poc_org_name                = 10;
+    optional stringValue        poc_email                   = 11;
+    optional stringValue        modification_date           = 12;
+    optional stringValue        poc_phone                   = 13;
+    optional stringValue        mom_version                 = 14;
+    optional stringValue        fed_name                    = 15;
+
+    repeated OmdComponent       omd_component               = 16;
+}
+
+message OmdFile
+{
+    required string         version         = 1;
+    repeated ObjectModel    object_model    = 2;
+}
+

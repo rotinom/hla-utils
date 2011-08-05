@@ -1,0 +1,10 @@
+  (ComplexDataType (Name "CDTName" )
+      (Description "Some Description" )
+      (ComplexComponent (FieldName "ComponentName" )
+      (DataType "long" )
+      (Accuracy "perfect")
+      (AccuracyCondition "always")
+
+    )
+  )
+
