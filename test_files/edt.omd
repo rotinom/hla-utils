@@ -1,0 +1,13 @@
+  (EnumeratedDataType (Name "Test EDT" )
+    (MOMEnumeratedDataType TRUE )
+    (AutoSequence No )
+    (Description "Test Description" )
+    (StartValue 1 )
+    (Enumeration (Enumerator "Enum 1" )
+                 (Representation 0 )
+    )
+    (Enumeration (Enumerator "Enum 2" )
+                 (Representation 1 )
+    )
+  )
+
