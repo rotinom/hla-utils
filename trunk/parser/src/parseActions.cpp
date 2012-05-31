@@ -52,6 +52,10 @@ namespace omdParser
             objectModel = NULL;
             component = NULL;
             attrib = NULL;
+            p = NULL;
+            dim = NULL;
+            e = NULL;
+            cc = NULL;
 
             // Clear our active pointers
             a_m = &om_m;
@@ -159,6 +163,7 @@ namespace omdParser
         a_v = &om_v;
 
         objectModel = omdFile.add_object_model();
+        objectModel->set_view_type(omdParser::ObjectModel_ViewType_raw);
     }
 
 	void commitObjectModel(const char* first, const char* last)

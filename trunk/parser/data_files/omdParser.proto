@@ -2,42 +2,6 @@
 
 package omdParser;
 
-// Deprecated..  Do not use..
-enum CollectionType
-{
-    UnknownEnum             = -1;
-    RootEnum                =  0;
-    ObjectModelEnum         =  1;
-    ClassEnum               =  2;
-    AttributeEnum           =  3;
-    InteractionEnum         =  4;
-    ParameterEnum           =  5;
-    CDTEnum                 =  6;
-    ComplexComponentEnum    =  7;
-    EDTEnum                 =  8;
-    EnumerationEnum         =  9;
-    RoutingSpaceEnum        = 10;
-    DimensionEnum           = 11;
-    NoteEnum                = 12;
-}
-
-// Deprecated.  do not use...
-message ElementNode
-{
-    required string key     = 1;
-    required string value   = 2;
-    repeated uint32 note    = 3;
-}
-
-// Deprecated..  do not use
-message CollectionNode
-{
-    required CollectionType type       = 1;
-    repeated ElementNode    element    = 2; 
-    repeated CollectionNode collection = 3;
-
-}
-
 message boolValue
 {
     required bool   value = 1;
@@ -304,6 +268,10 @@ message OmdComponent
 
 message ObjectModel
 {
+
+
+        
+
     required stringValue        name                        =  1;
     optional stringValue        version_number              =  2;
     optional stringValue        type                        =  3;
@@ -320,7 +288,30 @@ message ObjectModel
     optional stringValue        mom_version                 = 14;
     optional stringValue        fed_name                    = 15;
 
-    repeated OmdComponent       omd_component               = 16;
+
+
+    enum ViewType
+    {
+        raw     = 1;
+        logical = 2;
+    }
+
+
+    // Used to determine what "type" of view into this object model
+    // we are using.  Please see the general parsing concepts 
+    // section of the API
+    required ViewType           view_type                   = 16;
+
+    // Use this for the "raw" view
+    repeated OmdComponent       omd_component               = 17;
+
+    // Use these for the "logical" view
+    repeated Class              classes                     = 18;
+    repeated Interaction        interactions                = 19;
+    repeated EnumeratedDataType edts                        = 20;
+    repeated ComplexDataType    cdts                        = 21;
+    repeated Note               notes                       = 22;
+    repeated RoutingSpace       routing_spaces              = 23;
 }
 
 message OmdFile
