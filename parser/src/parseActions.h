@@ -11,10 +11,7 @@
 namespace omdParser
 {
 
-    typedef boost::shared_ptr<CollectionNode> g_omdCollNodePtr;
-    typedef boost::shared_ptr<ElementNode>    g_omdElemNodePtr;
-    typedef std::vector<CollectionNode*>      g_omdCollList;
- 
+
 	/**
 		So, what is all this stuff?  Well, when Boost::Spirit parses
 		a file, the scope is all messy (short version).  So, to avoid

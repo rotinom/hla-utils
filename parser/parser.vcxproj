@@ -47,7 +47,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>c:\boost\1.46.1;$(ProjectDir)\include\cpp;$(SolutionDir)\extern\protobuf\2.4.0a\include;$(ProjectDir)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>c:\boost\;$(ProjectDir)\include\cpp;$(SolutionDir)\extern\protobuf\2.4.0a\include;$(ProjectDir)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NOMINMAX;WIN32;_DEBUG;_WINDOWS;_USRDLL;OMD_PARSER_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -98,14 +98,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="include\cpp\omdParser.pb.cc" />
-    <ClCompile Include="src\omdNormalizer.cpp" />
     <ClCompile Include="src\omdParserApi.cpp" />
     <ClCompile Include="src\parseActions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\cpp\omdParser.pb.h" />
     <ClInclude Include="src\omdGrammar.h" />
-    <ClInclude Include="src\omdNormalizer.h" />
     <ClInclude Include="src\omdParserApi.h" />
     <ClInclude Include="src\parseActions.h" />
   </ItemGroup>

@@ -17,174 +17,6 @@ psStringMap_t psStringMap;
 
 
 
-void printElement(const omdParser::ElementNode * element, const unsigned int indent=0)
-{
-    std::string indentString = indentMap[indent];
-
-    std::string notes;
-    if(element->note_size() > 0)
-    {
-        notes += " [";
-        
-        unsigned int numNotes = element->note_size();
-        for(unsigned int i = 0; i < numNotes; i++)
-        {
-            // This is a safer, cross-platform alternative to sprintf.
-            // No, I'm not terribly thrilled with the syntax.  *shrugs*
-            notes += boost::str(boost::format("%i") % element->note(i));
-
-            // Don't put a comma after the last note
-            if(i < numNotes-1)
-            {
-                notes += ",";
-            }
-        }
-
-        notes += "]";
-    }
-	std::cout << indentString << "(" << element->key() << " " << element->value() << notes << ")";
-}
-
-void printCollection(const omdParser::CollectionNode * coll, const unsigned int indent=0)
-{
-    std::string indentString = indentMap[indent];
-    std::string prevIndentString;
-    
-	// If we are the first node, then set our previous indent to
-	// the current indentation level
-    if(0 == indent)
-    {
-        prevIndentString = indentMap[0];
-    }
-    else
-    {
-        prevIndentString = indentMap[indent-indentStepSize];
-    }
-
-	// Print out the node type
-    if(omdParser::RootEnum != coll->type())
-    {
-        std::string strType;
-        switch(coll->type())
-        {
-            case omdParser::ClassEnum:
-            {
-                strType = "Class";
-                break;
-            }
-            case omdParser::AttributeEnum:
-            {
-                strType = "Attribute";
-                break;
-            }
-            case omdParser::InteractionEnum:
-            {
-                strType = "Interaction";
-                break;
-            }
-            case omdParser::ParameterEnum:
-            {
-                strType = "Parameter";
-                break;
-            }
-            case omdParser::CDTEnum:
-            {
-                strType = "ComplexDataType";
-                break;
-            }
-            case omdParser::ComplexComponentEnum:
-            {
-                strType = "ComplexComponent";
-                break;
-            }
-            case omdParser::EDTEnum:
-            {
-                strType = "EnumeratedDataType";
-                break;
-            }
-            case omdParser::EnumerationEnum:
-            {
-                strType = "Enumeration";
-                break;
-            }
-            case omdParser::RoutingSpaceEnum:
-            {
-                strType = "RoutingSpace";
-                break;
-            }
-            case omdParser::DimensionEnum:
-            {
-                strType = "Dimension";
-                break;
-            }
-            case omdParser::NoteEnum:
-            {
-                strType = "Note";
-                break;
-            }
-            case omdParser::ObjectModelEnum:
-            {
-                strType = "ObjectModel";
-                break;
-            }
-            default:
-            {
-                strType = "UNKNOWN";
-                break;
-            }
-        }
-        std::cout << prevIndentString << "(" << strType << " ";
-    }
-
-	// Print out each element in this collection
-    unsigned int size = coll->element_size();
-    for(unsigned int i = 0; i < size; i++)
-    {
-        const omdParser::ElementNode* element = &coll->element(i);
-        if(omdParser::RootEnum != coll->type() && i == 0)
-        {
-            printElement(element, 0);
-        }
-        else
-        {
-            printElement(element, indent);
-        }
-
-        // This whole block of code, is due to the display of the
-        // official RPR-FOM.  Notes and Enumerations are displayed
-        // inconsistantly and what not.
-        bool lastItem = (i == (size-1));
-        if(lastItem && (omdParser::NoteEnum == coll->type()))
-        {
-            continue;
-        }
-        else if(lastItem && (omdParser::EnumerationEnum == coll->type()))
-        {
-            continue;
-        }
-        std::cout << std::endl;
-    }
-
-	// Print out any child collections
-    for(int i = 0; i < coll->collection_size(); i++)
-    {
-        printCollection(&coll->collection(i), indent+indentStepSize);
-        
-    }
-    
-    // For notes, there is an extra endline.  This formatting is based on
-    // the RPR-FOM.  This whole thing ought to be a bit more configurable.
-    if(omdParser::NoteEnum == coll->type())
-    {
-        std::cout << ")" << std::endl;
-        std::cout << std::endl;
-    }
-    else if(omdParser::RootEnum != coll->type())
-    {
-        std::cout << prevIndentString << ")" << std::endl;
-    }
-}
-
 std::string getNoteString(const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >& notes)
 {
     if(0 == notes.size())
@@ -707,6 +539,12 @@ void printFile(const omdParser::OmdFile * file)
 
 int main(int argc, char* argv[])
 {
+    if(argc != 2)
+    {
+        std::cout << "Please specify file to beautify on the command line..." << std::endl;
+        exit(-1);
+    }
+
     //omdParser::raw::setDebug(true);
 
     bool stuff = omdParser::raw::readFile(argv[1]);
@@ -731,6 +569,7 @@ int main(int argc, char* argv[])
     memset(one_indent, ' ', indentStepSize);
     one_indent[indentStepSize] = '\0';
 
+    // Create a map of indentations.
     std::string indentString;
     for(int i = 0; i < 10; i++)
     {      

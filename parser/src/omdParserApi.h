@@ -15,6 +15,26 @@
 
 namespace omdParser
 {
+
+
+
+    /**
+        For the record of my thoughts..
+
+        The current concept of having a "logical" versus "raw" representation simply 
+        doesn't make sense with dealing with protocol buffers.  Since you cannot make
+        a pointer from one protocol buffer element to another, you end up having massive 
+        redundancy of data when trying to create a logical represtation of the data.
+
+        The "best" (tm) way to do this, is on the application side (not the parser side)
+        with a generic utility class, awwwwwwww fuck.
+
+        Let's do this.  It's going to be expensive, but worth it....
+
+        Ugh.... 
+    **/ 
+
+
     /**
         This namespace encompasses logical parsing of an OMD file.  Most users 
         will want to use the functions in this namespace, as the object returned
@@ -26,12 +46,12 @@ namespace omdParser
     **/
     namespace logical
     {
-        OMDP_DECLSPEC 
-            unsigned int getDataFromRaw(
-                const void * const input, 
-                unsigned int inputLen, 
-                void * output,
-                unsigned int outputLen);
+        //OMDP_DECLSPEC 
+        //    unsigned int getDataFromRaw(
+        //        const void * const input, 
+        //        unsigned int inputLen, 
+        //        void * output,
+        //        unsigned int outputLen);
 
 
         /**
@@ -47,22 +67,6 @@ namespace omdParser
                 representation of the parsed file
         **/
         OMDP_DECLSPEC bool readFile(const char* fileName);
-
-#ifdef __cplusplus
-        /**
-            \brief This function will read an OMD-formatted file.
-
-            \param[in] fileName The name of the file which will be read
-
-            \returns true if the function was successful, false if 
-                the file does not exist, or an error occurred in parsing.
-
-            \note After this function is called sucessfully, the internal
-                state will contain a Google ProtocolBuffer with a 
-                representation of the parsed file
-        **/
-        OMDP_DECLSPEC bool readFile(const std::string fileName);
-#endif
 
         /**
             \brief This function is used to get the raw representation of
