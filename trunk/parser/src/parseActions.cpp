@@ -245,9 +245,7 @@ namespace omdParser
             {
                 assert(false);
             }
-            
         }
-
         om_m.clear();
     }
 

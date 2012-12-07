@@ -70,58 +70,58 @@ namespace omdParser
 		data from the OMD file, or a more "Raw" outlook on the file.
 	**/
 
-        typedef std::list<int> noteList_t;
+    typedef std::list<int> noteList_t;
 
-        struct omdValue
-        {
-            std::string value;
-            noteList_t  notes;
-        };
+    struct omdValue
+    {
+        std::string value;
+        noteList_t  notes;
+    };
     
-        typedef std::map<std::string, omdValue> strMap_t;
+    typedef std::map<std::string, omdValue> strMap_t;
 
 
-        OmdFile& getRoot();
-        void reset();
+    OmdFile& getRoot();
+    void reset();
 
-		/**
-			Note on naming of these variables:
+    /**
+	    Note on naming of these variables:
 
-			XXX_m is the map of name->value
-			XXX_k is the key of an item in the map
-			XXX_v is the actual value of the item to be inserted into the map
-		**/
-
-
-
-        // Object model map information
-        extern strMap_t om_m;
-        extern strMap_t::key_type om_k;
-        extern strMap_t::mapped_type om_v;
+	    XXX_m is the map of name->value
+	    XXX_k is the key of an item in the map
+	    XXX_v is the actual value of the item to be inserted into the map
+    **/
 
 
-        // Component map information (class/interaction/edt/...)
-        extern strMap_t c_m;
-        extern strMap_t::key_type c_k;
-        extern strMap_t::mapped_type c_v;
+
+    // Object model map information
+    extern strMap_t om_m;
+    extern strMap_t::key_type om_k;
+    extern strMap_t::mapped_type om_v;
 
 
-        // Sub-component map information (attribute, parameter, ...)
-        extern strMap_t sc_m;
-        extern strMap_t::key_type sc_k;
-        extern strMap_t::mapped_type sc_v;
-
-		// "Active" pointers.  These get swapped based on what we are
-		// currently parsing, since some of the elements in the grammar
-		// are reused.  These are used to allow them to update the appropriate
-		// component
-        extern strMap_t* a_m;
-        extern strMap_t::key_type* a_k;
-        extern strMap_t::mapped_type* a_v;
+    // Component map information (class/interaction/edt/...)
+    extern strMap_t c_m;
+    extern strMap_t::key_type c_k;
+    extern strMap_t::mapped_type c_v;
 
 
-        void disableCerr();
-        void enableCerr();
+    // Sub-component map information (attribute, parameter, ...)
+    extern strMap_t sc_m;
+    extern strMap_t::key_type sc_k;
+    extern strMap_t::mapped_type sc_v;
+
+    // "Active" pointers.  These get swapped based on what we are
+    // currently parsing, since some of the elements in the grammar
+    // are reused.  These are used to allow them to update the appropriate
+    // component
+    extern strMap_t* a_m;
+    extern strMap_t::key_type* a_k;
+    extern strMap_t::mapped_type* a_v;
+
+
+    void disableCerr();
+    void enableCerr();
 
 
     
@@ -144,7 +144,6 @@ namespace omdParser
 
     void allocClassAttribute(const char* first, const char* last);
     void commitClassAttribute(const char* first, const char* last);
-
 
 	void allocEnumeratedDataType(const char* first, const char* last);
     void commitEnumeratedDataType(const char* first, const char* last);

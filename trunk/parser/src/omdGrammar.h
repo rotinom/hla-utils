@@ -273,10 +273,10 @@ public:
                         lexeme_d
                         [
                             ch_p('v')                   && 
-                            uint_p && ch_p('.')         &&
-                            uint_p && ch_p('.')         &&
-                            uint_p && ch_p('.')         &&
-                            uint_p
+                            (
+                                uint_p                  %
+                                ch_p('.')
+                            )
                         ][&set_omdtVersion]				&&
                     ')';
             BOOST_SPIRIT_DEBUG_NODE(header);

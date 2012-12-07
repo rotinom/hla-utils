@@ -268,10 +268,6 @@ message OmdComponent
 
 message ObjectModel
 {
-
-
-        
-
     required stringValue        name                        =  1;
     optional stringValue        version_number              =  2;
     optional stringValue        type                        =  3;
