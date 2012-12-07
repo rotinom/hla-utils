@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "beautifier", "beautifier\beautifier.vcxproj", "{9C1C513A-602E-4219-90C1-99AECF286011}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "parser", "parser\parser.vcxproj", "{5D43A000-88D5-43EF-8543-66BBDE00DD5C}"
@@ -9,6 +9,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "merge", "merge\merge.vcxpro
 	ProjectSection(ProjectDependencies) = postProject
 		{5D43A000-88D5-43EF-8543-66BBDE00DD5C} = {5D43A000-88D5-43EF-8543-66BBDE00DD5C}
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "make_fed", "make_fed\make_fed.vcxproj", "{E4F94561-85C3-482E-A9FA-FDD936EFFC1B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qi_parser", "qi_parser\qi_parser.vcxproj", "{10F37131-FDDE-4F44-8A40-B18A87030F50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +32,14 @@ Global
 		{5510E4A5-59B8-4E2C-97FD-0B0251D1D8CB}.Debug|Win32.Build.0 = Debug|Win32
 		{5510E4A5-59B8-4E2C-97FD-0B0251D1D8CB}.Release|Win32.ActiveCfg = Release|Win32
 		{5510E4A5-59B8-4E2C-97FD-0B0251D1D8CB}.Release|Win32.Build.0 = Release|Win32
+		{E4F94561-85C3-482E-A9FA-FDD936EFFC1B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E4F94561-85C3-482E-A9FA-FDD936EFFC1B}.Debug|Win32.Build.0 = Debug|Win32
+		{E4F94561-85C3-482E-A9FA-FDD936EFFC1B}.Release|Win32.ActiveCfg = Release|Win32
+		{E4F94561-85C3-482E-A9FA-FDD936EFFC1B}.Release|Win32.Build.0 = Release|Win32
+		{10F37131-FDDE-4F44-8A40-B18A87030F50}.Debug|Win32.ActiveCfg = Debug|Win32
+		{10F37131-FDDE-4F44-8A40-B18A87030F50}.Debug|Win32.Build.0 = Debug|Win32
+		{10F37131-FDDE-4F44-8A40-B18A87030F50}.Release|Win32.ActiveCfg = Release|Win32
+		{10F37131-FDDE-4F44-8A40-B18A87030F50}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
