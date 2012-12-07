@@ -8,16 +8,12 @@
 
 int main(int argc, char* argv[])
 {
-    //if(argc != 2)
-    //{
-    //    std::cout << "Please specify file to beautify on the command line..." << std::endl;
-    //    exit(-1);
-    //}
+    MergeFile m1;
+    m1.parseFile("../test_files/merge1.omd");
+    
+    MergeFile m2;
+    m2.parseFile("../test_files/merge2.omd");
 
-    //omdParser::raw::setDebug(true);
-
-    MergeFile m;
-    m.parseFile("test_files/RPR-FOM.omd");
-
+    m1.merge(m2);
 	return 0;
 }
