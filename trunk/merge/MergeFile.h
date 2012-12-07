@@ -16,7 +16,12 @@ public:
 
     bool parseFile(const std::string& fileName);
 
+    void merge (const MergeFile& lhs);
+
 private:
+    void mergeClass(omdParser::ObjectModel& dest, const MergeFile& lhs);
+
+    int getScore(const omdParser::Class& cls);
 
     typedef std::map<int, omdParser::OmdComponent*> intClassMap_t;
     typedef std::map<int, omdParser::OmdComponent*> intInterMap_t;
@@ -31,6 +36,12 @@ private:
     strEdtMap_t   edtMap;
     strCdtMap_t   cdtMap;
     rsMap_t       rsMap;
+
+    typedef std::map<std::string, omdParser::Class*> strClassMap_t;
+    typedef std::map<std::string, omdParser::Interaction*> strInterMap_t;
+
+    strClassMap_t strClassMap_;
+    strInterMap_t strInterMap_;
 
     void loadMaps(omdParser::ObjectModel* om);
 
