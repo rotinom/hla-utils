@@ -303,9 +303,9 @@ namespace omdParser
 			return retValue;
 		}
 
-		unsigned int getDataSize()
+	    int getDataSize()
 		{
-			return raw_output.length();
+			return (int)raw_output.length();
 		}
 
 
@@ -318,7 +318,7 @@ namespace omdParser
 			}
 
             // Copy the data to the destination.
-			unsigned int out_bytes = std::min<unsigned int>(raw_output.size(), dataLen);
+			unsigned int out_bytes = (unsigned int)std::min<unsigned int>((unsigned int)raw_output.size(), dataLen);
 			memcpy(data, raw_output.c_str(), out_bytes);
 
             // Return the amount of data written

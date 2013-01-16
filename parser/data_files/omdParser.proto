@@ -2,29 +2,48 @@
 
 package omdParser;
 
+
+/**
+    This file contains the definitions for the objects within an OMD file.
+**/
+
+
+/**
+    Represents a boolean/note tuple
+**/
 message boolValue
 {
     required bool   value = 1;
     repeated int32  notes = 2;
 }
 
+/**
+    Represents an int32/note tuple
+**/
 message int32Value
 {
     required int32  value = 1;
     repeated int32  notes = 2;
 }
 
+/**
+    Represents an uint32/note tuple
+**/
 message uint32Value
 {
     required uint32 value = 1;
     repeated int32  notes = 2;
 }
 
+/**
+    Represents a string/note tuple
+**/
 message stringValue
 {
     required string value = 1;
     repeated int32  notes = 2;
 }
+
 
 // Represents an enumerated data type
 message EnumeratedDataType
@@ -284,30 +303,8 @@ message ObjectModel
     optional stringValue        mom_version                 = 14;
     optional stringValue        fed_name                    = 15;
 
-
-
-    enum ViewType
-    {
-        raw     = 1;
-        logical = 2;
-    }
-
-
-    // Used to determine what "type" of view into this object model
-    // we are using.  Please see the general parsing concepts 
-    // section of the API
-    required ViewType           view_type                   = 16;
-
     // Use this for the "raw" view
     repeated OmdComponent       omd_component               = 17;
-
-    // Use these for the "logical" view
-    repeated Class              classes                     = 18;
-    repeated Interaction        interactions                = 19;
-    repeated EnumeratedDataType edts                        = 20;
-    repeated ComplexDataType    cdts                        = 21;
-    repeated Note               notes                       = 22;
-    repeated RoutingSpace       routing_spaces              = 23;
 }
 
 message OmdFile
