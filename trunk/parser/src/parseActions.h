@@ -1,6 +1,6 @@
 #pragma once
 
-#include "omdParser.pb.h"
+#include "omdParser.h"
 
 #include "boost/shared_ptr.hpp"
 

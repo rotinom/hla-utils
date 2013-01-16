@@ -1,1 +1,1 @@
-..\..\extern\protobuf\2.4.0a\bin\Debug\protoc.exe --cpp_out=..\include\cpp\ --java_out=..\include\java --python_out=..\include\python --proto_path=..\data_files ..\data_files\omdParser.proto
+..\..\extern\protobuf\2.4.1\bin\protoc.exe --cpp_out=..\include\cpp\ --java_out=..\include\java --python_out=..\include\python --proto_path=..\data_files ..\data_files\omdParser.proto

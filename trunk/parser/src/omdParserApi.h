@@ -147,7 +147,7 @@ namespace omdParser
             \returns The size, in bytes, of the amount of data that a subsequent
                 call to getData will return
         **/
-        OMDP_DECLSPEC unsigned int getDataSize();
+        OMDP_DECLSPEC int getDataSize();
 
     }
 
